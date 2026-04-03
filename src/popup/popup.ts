@@ -90,6 +90,36 @@ function render(state: PopupModel): void {
 
 // --- Actions ---
 
+async function ensureContentScript(tabId: number): Promise<void> {
+  try {
+    // Get content script path from manifest (CRXJS generates hashed filenames)
+    const manifest = chrome.runtime.getManifest();
+    const contentScriptFiles = manifest.content_scripts?.[0]?.js ?? [];
+    if (contentScriptFiles.length > 0) {
+      await chrome.scripting.executeScript({
+        target: { tabId },
+        files: contentScriptFiles,
+      });
+    }
+  } catch {
+    // Content script may already be injected via manifest, ignore errors
+  }
+}
+
+async function sendMessageWithRetry(tabId: number, message: unknown, retries = 2): Promise<Message> {
+  for (let i = 0; i <= retries; i++) {
+    try {
+      return await chrome.tabs.sendMessage(tabId, message);
+    } catch (error: unknown) {
+      if (i === retries) throw error;
+      // Content script not ready yet, inject and retry
+      await ensureContentScript(tabId);
+      await new Promise((r) => setTimeout(r, 200));
+    }
+  }
+  throw new Error('Failed to connect to content script.');
+}
+
 async function init(): Promise<void> {
   dispatch({ type: 'START_EXTRACT' });
 
@@ -106,7 +136,7 @@ async function init(): Promise<void> {
       return;
     }
 
-    const response: Message = await chrome.tabs.sendMessage(tab.id, {
+    const response: Message = await sendMessageWithRetry(tab.id, {
       type: MESSAGE_TYPES.EXTRACT_PAGE,
     });
 

@@ -3,7 +3,7 @@
   "name": "Web to Markdown",
   "version": "1.0.0",
   "description": "One-click webpage to LLM-friendly Markdown",
-  "permissions": ["activeTab", "clipboardWrite"],
+  "permissions": ["activeTab", "scripting", "clipboardWrite"],
   "action": {
     "default_popup": "src/popup/popup.html",
     "default_icon": {
