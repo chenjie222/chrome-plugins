@@ -106,11 +106,6 @@ async function init(): Promise<void> {
       return;
     }
 
-    await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ['src/content/content-script.ts'],
-    });
-
     const response: Message = await chrome.tabs.sendMessage(tab.id, {
       type: MESSAGE_TYPES.EXTRACT_PAGE,
     });
