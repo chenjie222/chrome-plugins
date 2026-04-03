@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web to Markdown</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <div class="popup">
+      <div class="popup-header">
+        <h1>Web to Markdown</h1>
+      </div>
+
+      <!-- IDLE -->
+      <div id="state-idle" class="hidden">
+        <div class="idle-container">
+          <button id="btn-extract" class="btn-extract" type="button">
+            Extract Page
+          </button>
+        </div>
+      </div>
+
+      <!-- EXTRACTING -->
+      <div id="state-extracting" class="hidden">
+        <div class="spinner-container">
+          <div class="spinner"></div>
+          <span class="spinner-text">Extracting content...</span>
+        </div>
+      </div>
+
+      <!-- SUCCESS / COPIED -->
+      <div id="state-success" class="hidden">
+        <div class="result-container">
+          <div id="metadata-bar" class="metadata-bar">
+            <div class="meta-row">
+              <span class="meta-label">Title</span>
+              <span id="meta-title" class="meta-value meta-title"></span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">URL</span>
+              <span id="meta-url" class="meta-value meta-url"></span>
+            </div>
+            <div class="meta-row meta-stats">
+              <span><span id="meta-words" class="meta-value">0</span> words</span>
+              <span><span id="meta-time" class="meta-value">0</span> min read</span>
+            </div>
+          </div>
+          <pre id="preview" class="preview"></pre>
+          <div class="actions">
+            <button id="btn-copy" class="btn btn-copy" type="button">
+              Copy to Clipboard
+            </button>
+            <button id="btn-download" class="btn btn-download" type="button">
+              Download .md
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ERROR -->
+      <div id="state-error" class="hidden">
+        <div class="error-container">
+          <div class="error-icon">!</div>
+          <p id="error-message" class="error-message"></p>
+          <button id="btn-retry-error" class="btn-retry" type="button">
+            Retry
+          </button>
+        </div>
+      </div>
+
+      <!-- EMPTY -->
+      <div id="state-empty" class="hidden">
+        <div class="empty-container">
+          <div class="error-icon">?</div>
+          <p class="error-message">No extractable content found on this page.</p>
+          <button id="btn-retry-empty" class="btn-retry" type="button">
+            Retry
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,266 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 420px;
+  min-height: 240px;
+  max-height: 540px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1a1a2e;
+  background: #fafbfc;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  max-height: 540px;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.popup-header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* --- State: EXTRACTING --- */
+
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 0;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top-color: #4361ee;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-text {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* --- Metadata Bar --- */
+
+.metadata-bar {
+  padding: 10px 12px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.meta-row {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.meta-row + .meta-row {
+  margin-top: 4px;
+}
+
+.meta-label {
+  flex-shrink: 0;
+  width: 36px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+
+.meta-value {
+  color: #111827;
+}
+
+.meta-title {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.meta-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.meta-stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
+  font-size: 11px;
+}
+
+.meta-stats .meta-value {
+  font-weight: 600;
+  color: #374151;
+}
+
+/* --- State: SUCCESS / COPIED --- */
+
+.result-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.preview {
+  flex: 1;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 12px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #24292f;
+  background: #fff;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn-copy {
+  color: #fff;
+  background: #4361ee;
+  border-color: #4361ee;
+}
+
+.btn-copy:hover {
+  background: #3a56d4;
+}
+
+.btn-copy:active {
+  background: #2f48b8;
+}
+
+.btn-copy.copied {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+.btn-download {
+  color: #24292f;
+  background: #fff;
+}
+
+.btn-download:hover {
+  background: #f3f4f6;
+}
+
+.btn-download:active {
+  background: #e5e7eb;
+}
+
+/* --- State: ERROR / EMPTY --- */
+
+.error-container,
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 36px 0;
+  text-align: center;
+}
+
+.error-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #dc2626;
+  background: #fef2f2;
+  border-radius: 50%;
+}
+
+.empty-container .error-icon {
+  color: #d97706;
+  background: #fffbeb;
+}
+
+.error-message {
+  font-size: 13px;
+  color: #6b7280;
+  max-width: 300px;
+}
+
+.btn-retry {
+  padding: 6px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #4361ee;
+  background: transparent;
+  border: 1px solid #4361ee;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-retry:hover {
+  background: #eef1fd;
+}
+
+.btn-retry:active {
+  background: #dde3fb;
+}
+
+/* --- Utility --- */
+
+.hidden {
+  display: none !important;
+}
