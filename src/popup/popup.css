@@ -39,6 +39,34 @@ body {
   color: #111827;
 }
 
+/* --- State: IDLE --- */
+
+.idle-container {
+  padding: 24px 0;
+}
+
+.btn-extract {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #4361ee;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-extract:hover {
+  background: #3a56d4;
+}
+
+.btn-extract:active {
+  background: #2f48b8;
+}
+
 /* --- State: EXTRACTING --- */
 
 .spinner-container {
@@ -188,6 +216,11 @@ body {
 .btn-copy.copied {
   background: #16a34a;
   border-color: #16a34a;
+}
+
+.btn-copy.copy-failed {
+  background: #dc2626;
+  border-color: #dc2626;
 }
 
 .btn-download {
